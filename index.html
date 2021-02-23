@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>History Adventures</title>
+    <link rel="icon" href="./assets/img/ha.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"
+          integrity="sha512-yHknP1/AwR+yx26cB1y0cjvQUMvEa2PFzt1c9LlS4pRQ5NOTZFWbhBig+X9G9eYW/8m0/4OXNx8pxJ6z57x0dw=="
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"
+          integrity="sha512-17EgCFERpgZKcm0j0fEq1YCJuyAWdz9KUtv1EjVuaOz8pDnh/0nZxmU6BBXwaaxqoi9PQXnRWqlcDB027hgv9A=="
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/declaration.css">
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LVLLYGLPS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-1LVLLYGLPS');
+    </script>
+</head>
+<body class="d-flex flex-column overflow-hidden">
+<div class="position-absolute navigation-popup d-none" id="navigation_popup"></div>
+<div class="navigation-panel position-absolute pt-5 pl-2 pr-5" id="navigation_panel">
+    <div id="navigation"></div>
+</div>
+<button class="arrow-left position-absolute" id="arrow-left">
+    <svg aria-hidden="true" class="slider-arrow" focusable="false" data-prefix="fas" data-icon="chevron-circle-left"
+         role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <path fill="currentColor"
+              d="M256 504C119 504 8 393 8 256S119 8 256 8s248 111 248 248-111 248-248 248zM142.1 273l135.5 135.5c9.4 9.4 24.6 9.4 33.9 0l17-17c9.4-9.4 9.4-24.6 0-33.9L226.9 256l101.6-101.6c9.4-9.4 9.4-24.6 0-33.9l-17-17c-9.4-9.4-24.6-9.4-33.9 0L142.1 239c-9.4 9.4-9.4 24.6 0 34z"
+              class=""></path>
+    </svg>
+</button>
+<button class="arrow-right position-absolute" id="arrow-right">
+    <svg aria-hidden="true" class="slider-arrow" focusable="false" data-prefix="fas" data-icon="chevron-circle-right"
+         role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <path fill="currentColor"
+              d="M256 8c137 0 248 111 248 248S393 504 256 504 8 393 8 256 119 8 256 8zm113.9 231L234.4 103.5c-9.4-9.4-24.6-9.4-33.9 0l-17 17c-9.4 9.4-9.4 24.6 0 33.9L285.1 256 183.5 357.6c-9.4 9.4-9.4 24.6 0 33.9l17 17c9.4 9.4 24.6 9.4 33.9 0L369.9 273c9.4-9.4 9.4-24.6 0-34z"
+              class=""></path>
+    </svg>
+</button>
+<button class="btn navigation-button align-self-start" onclick="openCloseNavigation()">
+    <svg class="nav-svg" fill="#a2a2a2" aria-hidden="true" focusable="false" data-prefix="fal" data-icon="bars"
+         role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+        <path d="M442 114H6a6 6 0 0 1-6-6V84a6 6 0 0 1 6-6h436a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6zm0 160H6a6 6 0 0 1-6-6v-24a6 6 0 0 1 6-6h436a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6zm0 160H6a6 6 0 0 1-6-6v-24a6 6 0 0 1 6-6h436a6 6 0 0 1 6 6v24a6 6 0 0 1-6 6z"></path>
+    </svg>
+</button>
+<button class="btn playButton position-absolute rounded-circle align-items-center justify-content-center"
+        id="videoButton">
+</button>
+<div class="audio-button-container position-absolute">
+    <div class="audio-button" id="audio-button">
+        <svg class="audio-icon" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="volume" role="img"
+             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512">
+            <path fill="currentColor"
+                  d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zM480 256c0-63.53-32.06-121.94-85.77-156.24-11.19-7.14-26.03-3.82-33.12 7.46s-3.78 26.21 7.41 33.36C408.27 165.97 432 209.11 432 256s-23.73 90.03-63.48 115.42c-11.19 7.14-14.5 22.07-7.41 33.36 6.51 10.36 21.12 15.14 33.12 7.46C447.94 377.94 480 319.53 480 256zm-141.77-76.87c-11.58-6.33-26.19-2.16-32.61 9.45-6.39 11.61-2.16 26.2 9.45 32.61C327.98 228.28 336 241.63 336 256c0 14.38-8.02 27.72-20.92 34.81-11.61 6.41-15.84 21-9.45 32.61 6.43 11.66 21.05 15.8 32.61 9.45 28.23-15.55 45.77-45 45.77-76.88s-17.54-61.32-45.78-76.86z"></path>
+        </svg>
+    </div>
+</div>
+<div class="h-100" id="page-show">
+
+</div>
+
+<!-- Modal revolutions__first -->
+<div class="modal fade p-0 mx-auto"
+     id="revolutionsFirst"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog m-0 background-black" role="document">
+        <div class="modal-content position-relative background-black">
+            <button id="page_13_1_popup_close" type="button"
+                    class="close position-absolute text-white border rounded px-3 btn btn-outline" 
+                    data-dismiss="modal"
+                    aria-label="Close">
+                <span aria-hidden="true">
+                     <span class="d-none d-sm-inline-block">Done</span>
+                    <img src="./assets/img/close-white.svg" 
+                    width="25" class="h-auto d-sm-none d-inline-block" alt="">
+                </span>
+            </button>
+            <div class="modal-body p-0 rounded-0 text-center">
+                <div class="col-5 h-100 mx-auto">
+                    <div class=" scroll-container">
+                        <div class="position-relative h-100 min-height d-flex align-items-center">
+                            <div class="video-background position-relative">
+                                <img src="assets/img/audio-modal-images/Agent_end_1.jpg" alt="">
+                                <div class="text-left position-absolute audio-modal-text">
+                                    <p class="text-white">
+                                        &nbsp; &nbsp;Arnold scrambles for his pistol. I gasp, my knees locked. The gun
+                                        comes to point
+                                        at my head and I stare into the unloving eyes of a traitor. He will do anything
+                                        to save himself from his compatriots.<br/>
+                                        &nbsp; &nbsp;“She’s my slave, Benedict,” John sighs and my heart beats again.
+                                        “Let me do it.”
+                                        My legs turn to water at those final words. My master presses his friend from
+                                        the doorway and looks down at me. As I cringe away from him, he withdraws his
+                                        gun.<br/>
+                                        &nbsp; &nbsp;“Master, I’m sorry,” I whisper.<br/>
+                                        &nbsp; &nbsp;But the gunshot silences me forever.
+                                    </p>
+                                </div>
+                                <audio id="popup_13_1_video" class="screen-size w-100" autoplay muted loop>
+                                    <source src="assets/img/audio-video/Agent_355_end_1.mp3">
+                                </audio>
+                                <div class="mute-btn btn"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal revolutions__second -->
+<div
+        class="modal fade p-0 mx-auto"
+        id="revolutionsSecond"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+    <div class="modal-dialog m-0 background-black" role="document">
+        <div class="modal-content position-relative background-black">
+            <button id="page_13_2_popup_close" type="button"
+                    class="close position-absolute text-white border rounded px-3 btn btn-outline"
+                    data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">
+                     <span class="d-none d-sm-inline-block">Done</span>
+                    <img src="./assets/img/close-white.svg" width="25" class="h-auto d-sm-none d-inline-block" alt="">
+                </span>
+            </button>
+            <div class="modal-body p-0 rounded-0 text-center">
+                <div class="col-5 h-100 mx-auto">
+                    <div class=" scroll-container">
+                        <div class="position-relative h-100 min-height">
+                            <div class="video-background d-flex align-items-center position-relative">
+                                <img src="assets/img/audio-modal-images/CYOA_template_02  2-min.jpg" alt="">
+                                <div class="text-left position-absolute audio-modal-text">
+                                    <p class="text-white">
+                                        Arnold scrambles for his pistol. My heart leaps in my chest and I fly out of the
+                                        room, down the servant’s stairs, and out the garden door. I must get word to the
+                                        rebels of this “West Point.” If it is enough to kill me for, it is enough for
+                                        which to risk running away.<br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;I fly into the night and listen to the hounds tear up
+                                        the ground
+                                        behind me.
+                                        Skirt tied tight about my waist, I climb the trees and drag myself from one
+                                        branch under the dim light of the sliver of moon above. I finally reach a river,
+                                        where I can begin my long walk through the cleansing waters. My future is
+                                        uncertain, but only death lies behind me. Like my young country, I must move
+                                        forward no matter what the risk.
+                                    </p>
+                                </div>
+                                <audio id="popup_13_2_video" class="screen-size w-100" autoplay muted loop>
+                                    <source src="assets/img/audio-video/Agent_355_end_2.mp3">
+                                </audio>
+                                <div class="mute-btn btn"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal revolutions__second -->
+<div
+        class="modal fade p-0 mx-auto"
+        id="video-screen"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+    <div
+            class="modal-dialog m-0"
+            role="document">
+        <div class="modal-content position-relative">
+
+        </div>
+    </div>
+</div>
+<div
+        class="modal fade p-0 mx-auto"
+        id="second-3d"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+    <div
+            class="modal-dialog m-0"
+            role="document">
+        <div class="modal-content position-relative">
+
+        </div>
+    </div>
+</div>
+<div
+        class="modal fade p-0 mx-auto"
+        id="modal-3d-3-part"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+    <div
+            class="modal-dialog m-0"
+            role="document">
+        <div class="modal-content position-relative">
+
+        </div>
+    </div>
+</div>
+<div
+        class="modal fade p-0 mx-auto"
+        id="modal-3d-4-part"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+    <div
+            class="modal-dialog m-0"
+            role="document">
+        <div class="modal-content position-relative">
+
+        </div>
+    </div>
+</div>
+<div
+        class="modal fade p-0 mx-auto"
+        id="modal-3d-5-part"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+    <div
+            class="modal-dialog m-0"
+            role="document">
+        <div class="modal-content position-relative">
+
+        </div>
+    </div>
+</div>
+
+<!--quizModal-->
+<div class="modal culpe-modal p-0" id="quizModal">
+    <button type="button" onclick="closePopup()"
+            class="btn culpe-modal__btn text-white bg-transparent" data-dismiss="modal">
+        <span class="d-none d-sm-inline-block">Done</span>
+        <img src="./assets/img/close-white.svg" width="25" class="h-auto d-sm-none d-inline-block" alt="">
+    </button>
+    <div class="w-100 h-100 d-flex justify-content-center position-relative">
+        <iframe class="quiz-iframe h-100" id="quiz-iframe" src=""></iframe>
+    </div>
+</div>
+<!-- Modal one last rally -->
+<div
+        class="modal fade p-0 mx-auto"
+        id="oneLastRally"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+    <div
+            class="modal-dialog m-0 p-0 h-100 background-black"
+            role="document">
+        <div class="modal-content position-relative h-100 background-black">
+            <button id="oneLastRally_close"
+                    type="button"
+                    class="close position-absolute text-white border rounded px-3 btn btn-outline"
+                    data-dismiss="modal"
+                    aria-label="Close">
+                <span aria-hidden="true">
+                     <span class="d-none d-sm-inline-block">Done</span>
+                    <img src="./assets/img/close-white.svg" width="25" class="h-auto d-sm-none d-inline-block" alt="">
+                </span>
+            </button>
+            <div class="modal-body p-0 rounded-0 text-center">
+                <div class="h-100">
+                    <div class="col-5 h-100 mx-auto">
+                        <div class=" scroll-container">
+                            <div class="position-relative min-height d-flex align-items-center">
+                                <img src="./assets/img/audio-modal-images/CYOA_template_02 3-min.jpg"
+                                     class="popup-image-24 min-height"
+                                     alt="">
+                                <div class="text-left position-absolute audio-modal-text">
+                                    <p class="text-white">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;I refuse to succumb to this sickness; I rise to my feet,
+                                        my heart set with angry
+                                        intent. I pluck berries from a nearby tree hoping that the fruit will heal me,
+                                        but regardless I will reap revenge on these white men.<br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;I sneak into their horse pen. I move silently until I
+                                        can open the pen’s gate.
+                                        Then, I let out a loud yell to startle them; they bolt away and out of their
+                                        enclosure thanks to the gateway I have opened. Yes, it is a cowardly act, but as
+                                        I watch the horses beat the earth as they gallop farther away, and hear rumbles
+                                        of anger from the white men approaching behind me, I grit my teeth and enjoy
+                                        this chaos I’ve created as much as I enjoy everything else new in my life.
+
+                                    </p>
+                                </div>
+                            </div>
+                            <audio id="popup_24_1_video" class="screen-size w-100" autoplay muted loop>
+                                <source src="assets/audio/01_CYOA_Jiemba_Sabotage_1.mp3">
+                            </audio>
+                            <div class="mute-btn btn"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Live to fight another day -->
+<div
+        class="modal fade p-0 mx-auto"
+        id="liveToFightAnotherDay"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+    <div
+            class="modal-dialog m-0 p-0 h-100 background-black"
+            role="document">
+        <div class="modal-content position-relative h-100 background-black">
+            <button id="liveToFightAnotherDay_close"
+                    type="button"
+                    class="close position-absolute text-white border rounded px-3 btn btn-outline"
+                    data-dismiss="modal"
+                    aria-label="Close">
+                <span aria-hidden="true">
+                   <span class="d-none d-sm-inline-block">Done</span>
+                    <img src="./assets/img/close-white.svg" width="25" class="h-auto d-sm-none d-inline-block" alt="">
+                </span>
+            </button>
+            <div class="modal-body p-0 rounded-0 text-center">
+                <div class="h-100">
+                    <div class="col-5 h-100 mx-auto">
+                        <div class="scroll-container">
+                            <div class="position-relative min-height  d-flex align-items-center">
+                                <img src="./assets/img/audio-modal-images/CYOA_template_02 4-min.jpg"
+                                     class="popup-image-24 min-height"
+                                     alt="">
+                                <div class="text-left position-absolute audio-modal-text">
+                                    <p class="text-white">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;I must visit my tribe’s healer to find some way to beat
+                                        this. I am
+                                        one of the
+                                        few who dare get close to the whites. Watching them, trying to understand why
+                                        they do what they do, is part of who I am now. This knowledge may become
+                                        invaluable to my people one day and I must continue my work. It may be the
+                                        difference between life and death for my tribe and for the animals and plants
+                                        around us.<br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;I hold out hope that we can reclaim our lands in the
+                                        future and find
+                                        a balance
+                                        between our culture and this invading one. Leaving the sacred space, though, I
+                                        look back at it one last time and wonder when it, too, will grow carrots for the
+                                        whites.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <audio id="popup_24_2_video" class="screen-size w-100" autoplay muted loop>
+                            <source src="assets/audio/02_CYOA_Jiemba_Head_Back_1.mp3">
+                        </audio>
+                        <div class="mute-btn btn"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal FadeToBlack-->
+<div
+        class="modal fade p-0 bg-black mx-auto"
+        id="FadeToBlack"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+    <div
+            class="modal-dialog m-0 h-100 background-black"
+            role="document">
+        <div class="modal-content position-relative h-100 background-black">
+            <button id="FadeToBlack_close"
+                    type="button"
+                    class="close position-absolute text-white shadow-none rounded px-3 btn btn-outline"
+                    data-dismiss="modal"
+                    aria-label="Close">
+                           <span aria-hidden="true">
+                    <span class="d-none d-sm-inline-block">Done</span>
+                <img src="./assets/img/close-white.svg" width="25" class="h-auto d-sm-none d-inline-block" alt="">
+                </span>
+            </button>
+            <div class="modal-body p-0 rounded-0 text-center">
+                <div class="h-100">
+                    <div class="col-5 h-100 mx-auto">
+                        <div class="scroll-container">
+                            <div class="position-relative h-100 min-height d-inline-block">
+                                <div class="text-left position-absolute audio-modal-text-top">
+                                    <p class="text-white">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;High on another pipe of opium, Fei Hong wandered home to
+                                        find his
+                                        glass front
+                                        door smashed, his wife unconscious on the floor, and his son abducted by the
+                                        politician’s henchmen. Rather than attend to his wife, he immediately flew into
+                                        a rage. Where was his son? She should have died to protect their boy!<br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;The neighbors heard the commotion and called the police.
+                                        When they
+                                        discovered
+                                        that Fei Hong still possessed ample amounts of opium, he was arrested and sent
+                                        to prison. Fei Hong escaped, but as he was heading home he spied a massive
+                                        number of British ships just off the shore near his abode. Fei Hong’s last
+                                        thoughts would be about how much the British wanted to reopen the port to opium
+                                        trade following recent restrictions; soon they were drowned out by cannon fire.
+
+                                    </p>
+                                </div>
+                                <img src="./assets/img/audio-modal-images/CYOA_template_02 5-min.jpg"
+                                     class="popup-image-24 min-height"
+                                     alt="">
+                            </div>
+                        </div>
+                        <audio id="FeiHong_end_1_audio" class="screen-size w-100" autoplay muted loop>
+                            <source src="assets/img/hong/audio/CYOA_Fei_Hong_Opium_1.mp3">
+                        </audio>
+                        <div class="mute-btn btn"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal ItUpForGood-->
+<div
+        class="modal fade p-0 bg-black mx-auto"
+        id="ItUpForGood"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+    <div
+            class="modal-dialog m-0 h-100 background-black"
+            role="document">
+        <div class="modal-content position-relative h-100 background-black">
+            <button id="ItUpForGood_close"
+                    type="button"
+                    class="close position-absolute text-white rounded px-3 btn btn-outline shadow-none"
+                    data-dismiss="modal"
+                    aria-label="Close">
+                 <span aria-hidden="true">
+                    <span class="d-none d-sm-inline-block">Done</span>
+                <img src="./assets/img/close-white.svg" width="25" class="h-auto d-sm-none d-inline-block" alt="">
+                </span>
+            </button>
+            <div class="modal-body p-0 rounded-0 text-center">
+                <div class="h-100">
+                    <div class="col-5 h-100 mx-auto">
+                        <div class="scroll-container">
+                            <div class="position-relative h-100 min-height d-inline-block">
+                                <img src="./assets/img/audio-modal-images/CYOA_template_02.jpg"
+                                     class="popup-image-24 min-height"
+                                     alt="">
+                                <div class="text-left position-absolute audio-modal-text-top">
+                                    <p class="text-white">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;Fei Hong realized how his addiction was disrupting his
+                                        family and swore to never
+                                        smoke again. He threw away what remained of his personal opium and headed home.
+                                        As he arrived, two men crashed through his front door. In the resulting chaos,
+                                        Fei Hong hurried his household out the back door to safety. At last, he had
+                                        remembered to put his family first; not his addiction.<br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;Though his wife and son found safety, Fei Hong was not
+                                        so lucky. The
+                                        politician’s henchmen beat poor Fei Hong within inches of his life and left him
+                                        bleeding and gasping on the floor. His ribs were broken, teeth were missing, and
+                                        his head pounded like a drum. Whether he would live or die was uncertain. But
+                                        the last thing he saw was a pair of policemen hurrying into his home.The world
+                                        faded to black for Fei Hong.
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <audio id="FeiHong_end_2_audio" class="screen-size w-100" autoplay muted loop>
+                            <source src="assets/img/hong/audio/CYOA_Fei_Hong_Better_3.mp3">
+                        </audio>
+                        <div class="mute-btn btn"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal jiemba Declaration -->
+<div
+        class="modal fade p-0 mx-auto"
+        id="declarationModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+    <div
+            class="modal-dialog m-0 h-100 background-black"
+            role="document">
+        <div class="modal-content position-relative h-100 background-black">
+            <button id="declarationModal_close"
+                    type="button" onclick="closeBigImagePopup()"
+                    class="close position-absolute text-white rounded px-3 btn btn-outline mr4 shadow-none border"
+                    data-dismiss="modal"
+                    aria-label="Close">
+                <span aria-hidden="true">
+                    <span class="d-none d-sm-inline-block">Done</span>
+                <img src="./assets/img/close-white.svg" width="25" class="h-auto d-sm-none d-inline-block" alt="">
+                </span>
+            </button>
+            <div class="modal-body p-0 rounded-0 text-center" id="declarationModal-container">
+                <iframe id="iframe-big-image" frameborder="0" width="100%" class="min-height-100"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal a wrrior Demise-->
+<div class="modal fade p-0 bg-black mx-auto"
+     id="awrriorDemiseModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div
+            class="modal-dialog m-0 h-100 background-black"
+            role="document">
+        <div class="modal-content position-relative h-100 background-black">
+            <button id="awrriorDemiseModal_close"
+                    type="button" onclick="closePopup()"
+                    class="close position-absolute text-white border rounded px-3 btn btn-outline"
+                    data-dismiss="modal"
+                    aria-label="Close">
+                <span aria-hidden="true">
+                    <span class="d-none d-sm-inline-block">Done</span>
+                    <img src="./assets/img/close-white.svg" width="25" class="h-auto d-sm-none d-inline-block" alt="">
+                </span>
+            </button>
+            <div class="modal-body p-0 rounded-0 text-center">
+                <div class="h-100">
+                    <div class="col-5 h-100 mx-auto">
+                        <div class="scroll-container">
+                            <div class="position-relative h-100 min-height d-inline-block">
+                                <img src="./assets/img/audio-modal-images/CYOA_template_02 6-min.jpg"
+                                     class="popup-image-24 min-height"
+                                     alt="">
+                                <div class="text-left position-absolute audio-modal-text">
+                                    <p class="text-white">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;Khari threw himself from the house scattered with bodies
+                                        and into
+                                        the hail of
+                                        gunfire. The first bullet took him in the shoulder, but it did not matter. He
+                                        did not throw with that hand. As his comrades in arms died around his feet, he
+                                        ran forward.<br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;These were not Belgians. Their dress was entirely
+                                        different, their
+                                        guns far
+                                        faster than the ones he had encountered before. The second bullet took him in
+                                        the knee, sending him to the ground. He hurled his spear as he went and watched
+                                        as it pinned the hat of a white man to a tree.<br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;The third bullet took his world.
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <audio id="khari_escape_01_audio" class="screen-size w-100" autoplay muted loop>
+                            <source src="assets/img/khari/audio-video/Khari_Engage_01.mp3">
+                        </audio>
+                        <div class="mute-btn btn"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal No Death Today-->
+<div class="modal fade p-0 bg-black mx-auto"
+     id="noDeathTodayModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div
+            class="modal-dialog m-0 h-100 background-black"
+            role="document">
+        <div class="modal-content position-relative h-100 background-black">
+            <button id="noDeathTodayModal_close"
+                    type="button" onclick="closePopup()"
+                    class="close position-absolute text-white border rounded px-3 btn btn-outline"
+                    data-dismiss="modal"
+                    aria-label="Close">
+                <span aria-hidden="true">
+                     <span class="d-none d-sm-inline-block">Done</span>
+                    <img src="./assets/img/close-white.svg" width="25" class="h-auto d-sm-none d-inline-block" alt="">
+                </span>
+            </button>
+            <div class="modal-body p-0 rounded-0 text-center">
+                <div class="h-100">
+                    <div class="col-5 h-100 mx-auto">
+                        <div class="scroll-container">
+                            <div class="position-relative h-100 min-height d-inline-block">
+                                <img src="./assets/img/audio-modal-images/CYOA_template_02 7-min.jpg"
+                                     class="popup-image-24 min-height"
+                                     alt="">
+                                <div class="text-left position-absolute audio-modal-text">
+                                    <p class="text-white">
+                                        &nbsp; &nbsp;The hail of gunfire was incomprehensible to Khari. How could these
+                                        guns firing
+                                        so much faster than those of the Belgians? His heart pounded in his ears as his
+                                        feet squelched on the gory floor.<br/>
+                                        &nbsp; &nbsp; He could not die like this. He had to save his people from the
+                                        fate of those
+                                        surrounding his feet. With a burst of speed, he flung open the door and tore
+                                        into the night. American gunfire followed him yet only one bullet clipped his
+                                        shoulder, but soon their sites lost him in the darkness.<br/>
+                                        &nbsp; &nbsp;Hating himself for leaving his fallen warriors behind, Khari made
+                                        it back to his
+                                        tribe. They gathered what they could carry and ran for their lives. It was
+                                        Khari’s first taste of cowardice, and he hated it.
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <audio id="khari_escape_02_audio" class="screen-size w-100" autoplay muted loop>
+                            <source src="assets/img/khari/audio-video/Khari_Escape_02.mp3">
+                        </audio>
+                        <div class="mute-btn btn"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal-->
+<div class="modal fade p-0 bg-black mx-auto"
+     id="chicagoEnd01"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog m-0 h-100 background-black"
+         role="document">
+        <div class="modal-content position-relative h-100 background-black">
+            <button id="chicagoEnd01_close"
+                    type="button" onclick="closePopup()"
+                    class="close position-absolute text-white border rounded px-3 btn btn-outline"
+                    data-dismiss="modal"
+                    aria-label="Close">
+                <span aria-hidden="true">
+                    <span class="d-none d-sm-inline-block">Done</span>
+                    <img src="./assets/img/close-white.svg" width="25" class="h-auto d-sm-none d-inline-block" alt="">
+                </span>
+            </button>
+            <div class="modal-body p-0 rounded-0 text-center">
+                <div class="h-100">
+                    <div class="col-5 h-100 mx-auto">
+                        <div class="scroll-container">
+                            <div class="position-relative h-100 min-height d-inline-block">
+                                <img src="./assets/img/audio-modal-images/CYOA_template_02 8-min.jpg"
+                                     class="popup-image-24 min-height"
+                                     alt="">
+                                <div class="text-left position-absolute audio-modal-text">
+                                    <p class="text-white">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;Thomas Brown never published again. His sudden
+                                        resignation came as a
+                                        surprise to
+                                        his colleagues in the press world. Some suspected that his investigation had
+                                        been fruitful, but Thomas refused to discuss it. Another bold, muckraking
+                                        journalist would have to crack the case. But for Thomas Brown? He had been
+                                        threatened into silence for the rest of his professional life.<br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;It was only in his final years, when the effects of age
+                                        began to
+                                        dull the
+                                        senses, that Thomas began to reveal parts of his story to his family and those
+                                        who would listen. By that point, though, the world had come to realize the full
+                                        extent of the atrocities of the stockyards.
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <audio id="Chicago_end_01_audio" class="screen-size w-100" autoplay muted loop>
+                            <source src="assets/img/thomosaBrown/CYOA/Tom_Brown_ShutUp_1.mp3">
+                        </audio>
+                        <div class="mute-btn btn"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal a wrrior Demise-->
+<div class="modal fade p-0 bg-black mx-auto"
+     id="chicagoEnd02"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog m-0 h-100 background-black"
+         role="document">
+        <div class="modal-content position-relative h-100 background-black">
+            <button id="chicagoEnd02_close"
+                    type="button" onclick="closePopup()"
+                    class="close position-absolute text-white border rounded px-3 btn btn-outline"
+                    data-dismiss="modal"
+                    aria-label="Close">
+                <span aria-hidden="true">
+                                    <span class="d-none d-sm-inline-block">Done</span>
+                    <img src="./assets/img/close-white.svg" width="25" class="h-auto d-sm-none d-inline-block" alt="">
+                </span>
+            </button>
+            <div class="modal-body p-0 rounded-0 text-center">
+                <div class="h-100">
+                    <div class="col-5 h-100 mx-auto">
+                        <div class="scroll-container">
+                            <div class="position-relative h-100 min-height d-inline-block">
+                                <img src="assets/img/audio-modal-images/CYOA_template_02 9-min.jpg"
+                                     class="popup-image-24 min-height"
+                                     alt="">
+                                <div class="text-left position-absolute audio-modal-text">
+                                    <p class="text-white">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;Thomas Brown returned home without his journal, but it
+                                        made no matter. The
+                                        nightmares he had seen over the past few weeks were seared into his conscience,
+                                        and he knew that he could not live with himself if he did not make the world
+                                        aware of the horrific conditions in these stockyards. He wrote the story and
+                                        turned it into his publisher.<br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;He waited patiently for word that his searing exposeé
+                                        would be published, but
+                                        when word didn’t arrive, Thomas became nervous and realized he had trusted the
+                                        wrong people. A few days later, Thomas heard a knock on his door around
+                                        midnight. When he opened it, there stood the man with the rolled-up sleeves and
+                                        his two friends.
+
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <audio id="Chicago_end_02_audio" class="screen-size w-100" autoplay muted loop>
+                            <source src="assets/img/thomosaBrown/CYOA/Tom_Brown_Write_1_with_voice.mp3">
+                        </audio>
+                        <div class="mute-btn btn"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade background-black p-0" id="apConnection" tabindex="-1" role="dialog"
+     aria-labelledby="apConnectionLabel" aria-hidden="true">
+    <div class="modal-dialog  my-0" role="document">
+        <div class="modal-content background-black position-relative">
+            <button type="button" class="close position-absolute text-white border rounded px-3 btn btn-outline"
+                    onclick="closePopup()" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">
+                    <span class="d-none d-sm-inline-block">Done</span>
+                    <img src="./assets/img/close-white.svg" width="25" class="h-auto d-sm-none d-inline-block" alt="">
+                </span>
+            </button>
+            <div class="modal-body p-0 rounded-0 text-center">
+                <div class="ap-connection-container d-flex justify-content-center text-white">
+                    <div class="width-controller px-5">
+                        <div class="mt-5 pt-5 title">
+                            AP World History: Modern Units and Topics covered
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="unit pr-4 pl-4 mt-3 text-uppercase">Unit 5</div>
+                        </div>
+                        <div class="font-stan mt-3">Revolutions</div>
+                        <div class="d-flex justify-content-center mt-3">
+                            <div class="text-points">
+                                5.1 The Enlightement<br>
+                                5.2 Nationalism and Revolutions in the Period from 1750 to 1900<br>
+                                5.9 Society and the Industrial Age<br>
+                                5.10 Continuity and Change in the Industrial Age<br>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="unit pr-4 pl-4 mt-3 text-uppercase">Unit 6</div>
+                        </div>
+                        <div class="font-stan mt-4">Consequences of Industrialization</div>
+                        <div class="d-flex justify-content-center mt-3">
+                            <div class="text-points">
+                                6.1 Rationales for Imperialism from 1750 to 1900<br>
+                                6.2 State Expansion from 1750 to 1900 <br>
+                                6.3 Indigenous Responses to State Expansion from 1750 to 1900<br>
+                                6.5 Economic Imperialism from 1750 to 1900<br>
+                                6.7 Effects of Migration ”
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal culpe-modal" id="gallery-popup">
+    <button type="button" class="btn culpe-modal__btn text-white bg-transparent"
+            onclick="closeGallery()" data-dismiss="modal">
+        <span class="d-none d-sm-inline-block">Done</span>
+        <img src="./assets/img/close-white.svg" width="25" class="h-auto d-sm-none d-inline-block"
+             alt="">
+    </button>
+    <div class="modal-dialog m-0 p-0">
+        <div class="modal-content border-0">
+            <div class="modal-body position-relative">
+                <div class="h-100 position-relative" id="gallery-popup-container">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hidden-container d-none" id="hidden-container"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script
+        type="text/javascript"
+        src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"
+        integrity="sha512-HGOnQO9+SP1V92SrtZfjqxxtLmVzqZpjFFekvzZVWoiASSQgSr4cw9Kqd2+l8Llp4Gm0G8GIFJ4ddwZilcdb8A=="
+        crossorigin="anonymous"></script>
+<script
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+<script
+        src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+
+<script src="./assets/js/dictionary-list.js"></script>
+<script src="assets/js/main.js"></script>
+<script src="assets/js/pagination.js"></script>
+</body>
+</html>
